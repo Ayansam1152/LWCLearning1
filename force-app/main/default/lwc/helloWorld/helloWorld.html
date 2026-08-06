@@ -1,10 +1,12 @@
 <template>
     <lightning-card title="Hello World" icon-name="custom:custom63">
 
-        <div>Hello {fName} {lName}</div>
+        <div>Hello {employee.fName} {employee.lName}</div>
+        <div>Age= {employee.Age}</div>
+        <div>City= {employee.City}</div>
+        <div>Rank = {getEmployeeRank}</div>
         <p class="slds-p-horizontal_small">
             Hello World, This is my first LWC component.
         </p>
-
     </lightning-card>
 </template>

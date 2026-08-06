@@ -1,0 +1,14 @@
+<template>
+    <lightning-card>
+        <lightning-input type="checkbox" label = "IsEmpty" onchange = {handleCheckBox}></lightning-input>
+
+        <template if:true = {flag}>
+            I am from true box
+        </template>
+
+        <template if:false = {flag}>
+            I am from false box
+        </template>
+    </lightning-card>
+    
+</template>
