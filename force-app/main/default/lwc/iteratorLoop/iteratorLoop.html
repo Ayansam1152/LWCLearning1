@@ -11,6 +11,7 @@
                 </tr>
             </thead>
         <template iterator:emp={employeeList}>
+            <!-- using iterator we got extra feature like fetch first and last item -->
             <tr key = {emp.id}>
             <td>{emp.value.fName}</td>
             <td>{emp.value.lName}</td>
