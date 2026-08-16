@@ -1,0 +1,17 @@
+<template>
+
+    <lightning-card title="child" class="boarder">
+        Hello World
+        <br>
+
+        <template if:true ={error}>
+            <b>Error occurred! in child</b>
+        </template>
+
+        <template if:false = {error}>
+            <b>Error did not occurred in child</b>
+        </template>
+
+    </lightning-card>
+    
+</template>
