@@ -1,0 +1,133 @@
+<template>
+    <lightning-card title={title}>
+        <lightning-button-icon icon-name="utility:adduser" variant="brand" alternative-text="Add contact"
+            class="slds-m-left_xx-small" title="Add contact" onclick={handleAddContact}></lightning-button-icon>
+        <template if:true={isAccountSelected}>
+            <template if:true={hasContacts}>
+                <template for:each={contacts} for:item="contact">
+                    <lightning-layout key={contact.id} class="slds-box slds-m-around_small">
+                        <lightning-layout-item size="8px">
+                            <b>{contact.Name}</b>
+                        </lightning-layout-item>
+                        <lightning-layout-item size="4px">
+                            <lightning-button-icon icon-name="utility:edit" variant="brand" alternative-text="Edit"
+                                class="slds-m-left_xx-small" title="Edit" onclick={handleEditContact}></lightning-button-icon>
+                            <lightning-button-icon icon-name="utility:delete" variant="brand" alternative-text="Delete"
+                                class="slds-m-left_xx-small" title="Delete"></lightning-button-icon>
+                        </lightning-layout-item>
+
+                    </lightning-layout>
+                </template>
+            </template>
+
+            <template if:false={hasContacts}>
+                <div class="slds-align_absolute-center">No Contacts found...</div>
+            </template>
+        </template>
+
+        <template if:false={isAccountSelected}>
+            <div class="slds-align_absolute-center">No Account Selected...</div>
+        </template>
+
+        <template if:true={isAddContactClicked}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <button class="slds-button slds-button_icon slds-modal__close">
+                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true" viewBox="0 0 520 520">
+                            <path
+                                d="M310 254l130-131c6-6 6-15 0-21l-20-21c-6-6-15-6-21 0L268 212a10 10 0 01-14 0L123 80c-6-6-15-6-21 0l-21 21c-6 6-6 15 0 21l131 131c4 4 4 10 0 14L80 399c-6 6-6 15 0 21l21 21c6 6 15 6 21 0l131-131a10 10 0 0114 0l131 131c6 6 15 6 21 0l21-21c6-6 6-15 0-21L310 268a10 10 0 010-14z" />
+                        </svg>
+                        <span class="slds-assistive-text">
+                            Cancel and close
+                        </span>
+                    </button>
+                    <div class="slds-modal__header">
+                        <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate" tabindex="-1">
+                            Add Contact
+                        </h1>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                        <p>
+                            Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id
+                            consequat
+                            veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud
+                            elit
+                            officia tempor esse quis. Cillum sunt ad dolore quis aute consequat ipsum magna exercitation
+                            reprehenderit magna. Tempor cupidatat consequat elit dolor adipisicing.
+                        </p>
+                        <p>
+                            Dolor eiusmod sunt ex incididunt cillum quis nostrud velit duis sit officia. Lorem aliqua
+                            enim
+                            laboris do dolor eiusmod officia. Mollit incididunt nisi consectetur esse laborum eiusmod
+                            pariatur
+                            proident. Eiusmod et adipisicing culpa deserunt nostrud ad veniam nulla aute est. Labore
+                            esse esse
+                            cupidatat amet velit id elit consequat minim ullamco mollit enim excepteur ea.
+                        </p>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={handleAddContactCancel}>
+                            Cancel
+                        </button>
+                        <button class="slds-button slds-button_brand">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+
+        <template if:true={isEditContactClicked}>
+            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-01"
+                class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <button class="slds-button slds-button_icon slds-modal__close">
+                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true" viewBox="0 0 520 520">
+                            <path
+                                d="M310 254l130-131c6-6 6-15 0-21l-20-21c-6-6-15-6-21 0L268 212a10 10 0 01-14 0L123 80c-6-6-15-6-21 0l-21 21c-6 6-6 15 0 21l131 131c4 4 4 10 0 14L80 399c-6 6-6 15 0 21l21 21c6 6 15 6 21 0l131-131a10 10 0 0114 0l131 131c6 6 15 6 21 0l21-21c6-6 6-15 0-21L310 268a10 10 0 010-14z" />
+                        </svg>
+                        <span class="slds-assistive-text">
+                            Cancel and close
+                        </span>
+                    </button>
+                    <div class="slds-modal__header">
+                        <h1 id="modal-heading-02" class="slds-modal__title slds-hyphenate" tabindex="-1">
+                            Edit Contact
+                        </h1>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                        <p>
+                            Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id
+                            consequat
+                            veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud
+                            elit
+                            officia tempor esse quis. Cillum sunt ad dolore quis aute consequat ipsum magna exercitation
+                            reprehenderit magna. Tempor cupidatat consequat elit dolor adipisicing.
+                        </p>
+                        <p>
+                            Dolor eiusmod sunt ex incididunt cillum quis nostrud velit duis sit officia. Lorem aliqua
+                            enim
+                            laboris do dolor eiusmod officia. Mollit incididunt nisi consectetur esse laborum eiusmod
+                            pariatur
+                            proident. Eiusmod et adipisicing culpa deserunt nostrud ad veniam nulla aute est. Labore
+                            esse esse
+                            cupidatat amet velit id elit consequat minim ullamco mollit enim excepteur ea.
+                        </p>
+                    </div>
+                    <div class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={handleEditContactCancel}>
+                            Cancel
+                        </button>
+                        <button class="slds-button slds-button_brand">
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+        </template>
+
+    </lightning-card>
+</template>
