@@ -11,9 +11,10 @@
                         </lightning-layout-item>
                         <lightning-layout-item size="4px">
                             <lightning-button-icon icon-name="utility:edit" variant="brand" alternative-text="Edit"
-                                class="slds-m-left_xx-small" title="Edit" onclick={handleEditContact}></lightning-button-icon>
+                                class="slds-m-left_xx-small" title="Edit"
+                                onclick={handleEditContact} data-contact-id={contact.Id}></lightning-button-icon>
                             <lightning-button-icon icon-name="utility:delete" variant="brand" alternative-text="Delete"
-                                class="slds-m-left_xx-small" title="Delete"></lightning-button-icon>
+                                class="slds-m-left_xx-small" title="Delete" onclick={handleContactDelete} data-contact-id={contact.Id}></lightning-button-icon>
                         </lightning-layout-item>
 
                     </lightning-layout>
@@ -48,30 +49,19 @@
                         </h1>
                     </div>
                     <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
-                        <p>
-                            Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id
-                            consequat
-                            veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud
-                            elit
-                            officia tempor esse quis. Cillum sunt ad dolore quis aute consequat ipsum magna exercitation
-                            reprehenderit magna. Tempor cupidatat consequat elit dolor adipisicing.
-                        </p>
-                        <p>
-                            Dolor eiusmod sunt ex incididunt cillum quis nostrud velit duis sit officia. Lorem aliqua
-                            enim
-                            laboris do dolor eiusmod officia. Mollit incididunt nisi consectetur esse laborum eiusmod
-                            pariatur
-                            proident. Eiusmod et adipisicing culpa deserunt nostrud ad veniam nulla aute est. Labore
-                            esse esse
-                            cupidatat amet velit id elit consequat minim ullamco mollit enim excepteur ea.
-                        </p>
+                        <lightning-record-edit-form object-api-name="Contact" record-id={recordId} onsuccess={handleSuccess}>
+                            <lightning-input-field field-name="Name"> </lightning-input-field>
+                            <lightning-input-field field-name="AccountId" value={accountId}> </lightning-input-field>
+                            <div class="slds-var-m-top_medium">
+                                <lightning-button variant="brand" type="submit" label="Save">
+                                </lightning-button>
+                            </div>
+                        </lightning-record-edit-form>
                     </div>
                     <div class="slds-modal__footer">
-                        <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={handleAddContactCancel}>
+                        <button class="slds-button slds-button_neutral" aria-label="Cancel and close"
+                            onclick={handleAddContactCancel}>
                             Cancel
-                        </button>
-                        <button class="slds-button slds-button_brand">
-                            Save
                         </button>
                     </div>
                 </div>
@@ -98,30 +88,19 @@
                         </h1>
                     </div>
                     <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
-                        <p>
-                            Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id
-                            consequat
-                            veniam incididunt duis in sint irure nisi. Mollit officia cillum Lorem ullamco minim nostrud
-                            elit
-                            officia tempor esse quis. Cillum sunt ad dolore quis aute consequat ipsum magna exercitation
-                            reprehenderit magna. Tempor cupidatat consequat elit dolor adipisicing.
-                        </p>
-                        <p>
-                            Dolor eiusmod sunt ex incididunt cillum quis nostrud velit duis sit officia. Lorem aliqua
-                            enim
-                            laboris do dolor eiusmod officia. Mollit incididunt nisi consectetur esse laborum eiusmod
-                            pariatur
-                            proident. Eiusmod et adipisicing culpa deserunt nostrud ad veniam nulla aute est. Labore
-                            esse esse
-                            cupidatat amet velit id elit consequat minim ullamco mollit enim excepteur ea.
-                        </p>
+                        <lightning-record-edit-form object-api-name="Contact" record-id={editableContactId} onsuccess={handleSuccess}>
+                            <lightning-input-field field-name="Name"> </lightning-input-field>
+                            <lightning-input-field field-name="AccountId" value={accountId}> </lightning-input-field>
+                            <div class="slds-var-m-top_medium">
+                                <lightning-button variant="brand" type="submit" label="Save">
+                                </lightning-button>
+                            </div>
+                        </lightning-record-edit-form>
                     </div>
                     <div class="slds-modal__footer">
-                        <button class="slds-button slds-button_neutral" aria-label="Cancel and close" onclick={handleEditContactCancel}>
+                        <button class="slds-button slds-button_neutral" aria-label="Cancel and close"
+                            onclick={handleEditContactCancel}>
                             Cancel
-                        </button>
-                        <button class="slds-button slds-button_brand">
-                            Save
                         </button>
                     </div>
                 </div>

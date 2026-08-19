@@ -3,7 +3,7 @@ public with sharing class AccountClass {
     @AuraEnabled(cacheable = true)
     public static List<Account> getAccounts(String searchText){
         try {
-            if(String.isBlank(searchText))
+            if(String.isBlank(searchText) || String.isEmpty(searchText))
             {
                 return [Select Id, Name From Account];
             }

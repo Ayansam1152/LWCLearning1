@@ -18,6 +18,11 @@ export default class AccountChild2 extends LightningElement {
         }
     ]
 
+    connectedCallback()
+    {
+        console.log("I am from account child 2, account table");
+    }
+
     rows = [
         {Id:'22', Name:'Edge'},
         {Id:'23', Name:'SoldTo'},
