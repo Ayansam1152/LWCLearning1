@@ -1,15 +1,14 @@
 @isTest
 private class AccountHelperTest {
-    @isTest static void testAccountHelperMethod() {
-        // Arrange
-        Account acc = new Account(Name = 'Helper Test Account');
+    @isTest
+    static void testAccountHelperMethod() {
+        Account acc = new Account(Name = 'Helper Test Account', Phone = '555-0100');
         insert acc;
 
-        // Act
-        List<Account> accounts = AccountHelper.getAccountList('Helper Test Account');
+        List<Account> accounts = AccountHelper.getAccountList(acc.Id);
 
-        // Assert
-        System.assertEquals(1,  accounts.size());
+        System.assertEquals(1, accounts.size());
         System.assertEquals('Helper Test Account', accounts[0].Name);
-        }
+        System.assertEquals('555-0100', accounts[0].Phone);
+    }
 }
