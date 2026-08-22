@@ -1,0 +1,51 @@
+name: Salesforce CI
+
+on:
+  pull_request:
+    branches:
+      - developer
+
+jobs:
+  validate:
+    name: Validate Salesforce Changes
+    runs-on: ubuntu-latest
+
+    steps:
+
+      # 1. Get repository code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Install Salesforce CLI
+      - name: Install Salesforce CLI
+        run: |
+          npm install --global @salesforce/cli
+          sf --version
+
+      # 3. Authenticate to Salesforce using JWT
+      - name: Authenticate to Salesforce
+        env:
+          SF_USERNAME: ${{ secrets.SF_USERNAME }}
+          SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID }}
+          SF_JWT_KEY: ${{ secrets.SF_JWT_KEY }}
+        run: |
+          printf '%s' "$SF_JWT_KEY" > server.key
+
+          sf org login jwt \
+            --username "$SF_USERNAME" \
+            --client-id "$SF_CLIENT_ID" \
+            --jwt-key-file server.key \
+            --instance-url https://login.salesforce.com \
+            --alias ci-org
+
+          rm -f server.key
+
+      # 4. Validate Salesforce deployment
+      - name: Validate deployment
+        run: |
+          sf project deploy start \
+            --source-dir force-app \
+            --target-org ci-org \
+            --dry-run \
+            --test-level RunLocalTests \
+            --wait 30
